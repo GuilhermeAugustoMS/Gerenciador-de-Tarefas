@@ -62,14 +62,4 @@ src/
   pensado para parecer uma ferramenta de foco/produtividade, evitando o clichê de
   "dark mode roxo genérico".
 
-## Correções feitas na revisão de código
 
-- Geração de ID de tarefa mais robusta: antes usava apenas `Date.now()` como fallback,
-  o que podia gerar IDs duplicados em criações muito rápidas; agora combina timestamp +
-  contador + valor aleatório.
-- Texto da tarefa é normalizado (espaços extras no meio do texto são reduzidos a um só).
-- Ordem de exibição dos filtros corrigida e explicitada via `FILTER_ORDER`, em vez de
-  depender da ordem de declaração das chaves de um objeto JS.
-- Campo de texto agora tem `maxLength` para não quebrar o layout com textos enormes.
-- `TaskContext` deixou de recriar funções e o objeto de valor a cada render
-  (`useCallback`/`useMemo`), reduzindo re-renders desnecessários.
