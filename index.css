@@ -1,0 +1,345 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --bg-deep: #15171c;
+  --bg-surface: #1c1f26;
+  --bg-surface-raised: #21242c;
+  --bg-input: #14161b;
+  --border-subtle: #2c3038;
+  --border-strong: #3a3f4a;
+  --text-primary: #edeef0;
+  --text-secondary: #9298a3;
+  --text-tertiary: #5d6370;
+  --accent: #e8a23d;
+  --accent-strong: #f0b35e;
+  --accent-text-on: #1c1306;
+  --danger: #e2645a;
+  --danger-bg: rgba(226, 100, 90, 0.12);
+  --success: #6fbf8b;
+  --focus-ring: rgba(232, 162, 61, 0.45);
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  background-image: radial-gradient(circle at 50% -10%, rgba(232, 162, 61, 0.06), transparent 55%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 56px 20px 64px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.app-header .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.app-header .subtitle {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* Formulário de adicionar tarefa */
+.task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.task-form input[type="text"] {
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task-form input[type="text"]::placeholder {
+  color: var(--text-tertiary);
+}
+
+.task-form input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.task-form input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.task-form button {
+  background: var(--accent);
+  color: var(--accent-text-on);
+  border: none;
+  border-radius: 10px;
+  padding: 0 22px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.task-form button:hover {
+  background: var(--accent-strong);
+}
+
+.task-form button:active {
+  transform: scale(0.97);
+}
+
+.task-form button:focus-visible,
+.filters button:focus-visible,
+.task-item .delete-btn:focus-visible,
+.summary .clear-btn:focus-visible,
+.task-checkbox-wrap input:focus-visible + .task-checkbox-custom {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin: 10px 0 18px;
+}
+
+/* Filtros */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin: 20px 0 18px;
+  padding: 4px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.filters button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filters button:hover {
+  color: var(--text-primary);
+}
+
+.filters button.active {
+  background: var(--bg-surface-raised);
+  color: var(--accent);
+  border: 1px solid var(--border-strong);
+}
+
+/* Contador / resumo */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+  padding: 0 2px;
+}
+
+.summary .clear-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.15s ease;
+}
+
+.summary .clear-btn:hover {
+  color: var(--danger);
+}
+
+/* Lista de tarefas */
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: 36px 10px;
+  font-size: 14px;
+}
+
+/* Item de tarefa */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--bg-surface-raised);
+  transition: border-color 0.15s ease;
+}
+
+.task-item:hover {
+  border-color: var(--border-subtle);
+}
+
+/* Checkbox customizado: o input nativo fica visualmente escondido mas
+   acessível (foco/teclado/leitor de tela continuam funcionando) */
+.task-checkbox-wrap {
+  position: relative;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.task-checkbox-wrap input[type="checkbox"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.task-checkbox-custom {
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg-input);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.task-checkbox-custom::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid var(--accent-text-on);
+  border-bottom: 2px solid var(--accent-text-on);
+  transform: rotate(45deg) translate(-1px, -1px) scale(0);
+  transition: transform 0.12s ease;
+}
+
+.task-checkbox-wrap input:checked + .task-checkbox-custom {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task-checkbox-wrap input:checked + .task-checkbox-custom::after {
+  transform: rotate(45deg) translate(-1px, -1px) scale(1);
+}
+
+.task-item .task-text {
+  flex: 1;
+  font-size: 14.5px;
+  color: var(--text-primary);
+  word-break: break-word;
+  transition: color 0.15s ease;
+}
+
+.task-item.completed {
+  background: transparent;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.task-item .delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.task-item .delete-btn:hover {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+@media (max-width: 420px) {
+  .app-container {
+    padding: 40px 14px 48px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .filters button {
+    font-size: 11.5px;
+    padding: 8px 6px;
+  }
+}
